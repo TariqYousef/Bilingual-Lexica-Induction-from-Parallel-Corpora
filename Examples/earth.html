@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<script>
+
+
+const data = {'nodes': [{'id': 0, 'name': 'οἰκουμένης', 'group': 'GRC'}, {'id': 1, 'name': 'γαίῃ', 'group': 'GRC'}, {'id': 2, 'name': 'מהארץ', 'group': 'HEB'}, {'id': 3, 'name': 'ⲡⲕⲁϩⲓ', 'group': 'COP'}, {'id': 4, 'name': 'the earth', 'group': 'ENG'}, {'id': 5, 'name': 'وزمین', 'group': 'FAR'}, {'id': 6, 'name': 'והארץ', 'group': 'HEB'}, {'id': 7, 'name': 'الارض', 'group': 'ARA'}, {'id': 8, 'name': 'from earth', 'group': 'ENG'}, {'id': 9, 'name': 'terras', 'group': 'LAT'}, {'id': 10, 'name': 'χθονὶ', 'group': 'GRC'}, {'id': 11, 'name': 'οἰκουμένην', 'group': 'GRC'}, {'id': 12, 'name': 'upon the earth', 'group': 'ENG'}, {'id': 13, 'name': 'terram', 'group': 'LAT'}, {'id': 14, 'name': 'האדמה׃', 'group': 'HEB'}, {'id': 15, 'name': 'face earth', 'group': 'ENG'}, {'id': 16, 'name': 'terrae', 'group': 'LAT'}, {'id': 17, 'name': 'הארץ׃', 'group': 'HEB'}, {'id': 18, 'name': 'γῇ', 'group': 'GRC'}, {'id': 19, 'name': 'on earth', 'group': 'ENG'}, {'id': 20, 'name': 'terra', 'group': 'POR'}, {'id': 21, 'name': 'γῆς', 'group': 'GRC'}, {'id': 22, 'name': 'chão', 'group': 'POR'}, {'id': 23, 'name': 'הארץ', 'group': 'HEB'}, {'id': 24, 'name': 'γῆν', 'group': 'GRC'}, {'id': 25, 'name': 'and earth', 'group': 'ENG'}, {'id': 26, 'name': 'ἐπιχθονίων', 'group': 'GRC'}, {'id': 27, 'name': 'of earth', 'group': 'ENG'}, {'id': 28, 'name': 'ⲙⲡⲕⲁϩ', 'group': 'COP'}, {'id': 29, 'name': 'earth', 'group': 'ENG'}, {'id': 30, 'name': 'ⲡⲕⲁϩ', 'group': 'COP'}, {'id': 31, 'name': 'האדמה', 'group': 'HEB'}, {'id': 32, 'name': 'terra', 'group': 'LAT'}, {'id': 33, 'name': 'برزمین', 'group': 'FAR'}], 'links': [{'source': 32, 'target': 29, 'value': 0.27170582226762, 'type': 'automatic'}, {'source': 13, 'target': 29, 'value': 0.2847826086956522, 'type': 'automatic'}, {'source': 16, 'target': 29, 'value': 0.3424657534246575, 'type': 'automatic'}, {'source': 29, 'target': 7, 'value': 0.7647058823529411, 'type': 'automatic'}, {'source': 21, 'target': 29, 'value': 0.4291338582677165, 'type': 'automatic'}, {'source': 26, 'target': 19, 'value': 0.6153846153846154, 'type': 'automatic'}, {'source': 26, 'target': 15, 'value': 0.3076923076923077, 'type': 'automatic'}, {'source': 29, 'target': 5, 'value': 0.5945945945945946, 'type': 'automatic'}, {'source': 19, 'target': 33, 'value': 0.32, 'type': 'automatic'}, {'source': 19, 'target': 33, 'value': 0.32, 'type': 'automatic'}, {'source': 23, 'target': 29, 'value': 0.3887895050685748, 'type': 'automatic'}, {'source': 17, 'target': 29, 'value': 0.2516682554814108, 'type': 'automatic'}, {'source': 6, 'target': 25, 'value': 0.3963963963963964, 'type': 'automatic'}, {'source': 31, 'target': 4, 'value': 0.3, 'type': 'automatic'}, {'source': 14, 'target': 4, 'value': 0.4, 'type': 'automatic'}, {'source': 2, 'target': 8, 'value': 0.5, 'type': 'automatic'}, {'source': 0, 'target': 27, 'value': 3, 'type': 'manual'}, {'source': 9, 'target': 29, 'value': 3, 'type': 'manual'}, {'source': 18, 'target': 29, 'value': 2, 'type': 'manual'}, {'source': 11, 'target': 29, 'value': 2, 'type': 'manual'}, {'source': 21, 'target': 27, 'value': 2, 'type': 'manual'}, {'source': 24, 'target': 29, 'value': 2, 'type': 'manual'}, {'source': 28, 'target': 4, 'value': 2, 'type': 'manual'}, {'source': 30, 'target': 4, 'value': 2, 'type': 'manual'}, {'source': 3, 'target': 4, 'value': 2, 'type': 'manual'}, {'source': 10, 'target': 4, 'value': 2, 'type': 'manual'}, {'source': 1, 'target': 4, 'value': 2, 'type': 'manual'}, {'source': 26, 'target': 12, 'value': 2, 'type': 'manual'}, {'source': 1, 'target': 22, 'value': 2, 'type': 'manual'}, {'source': 10, 'target': 20, 'value': 2, 'type': 'manual'}, {'source': 29, 'target': 8, 'value': 0.5, 'type': 'part_of'}, {'source': 29, 'target': 27, 'value': 0.5, 'type': 'part_of'}, {'source': 29, 'target': 25, 'value': 0.5, 'type': 'part_of'}, {'source': 29, 'target': 4, 'value': 0.5, 'type': 'part_of'}]}
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 300, left: 200},
+  width = 1600 - margin.left - margin.right,
+  height = 1200 - margin.top - margin.bottom;
+
+  color = d3.scaleOrdinal(types, d3.schemeCategory10)
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+.append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+  var nodescolors = {"ENG":"#003366", "HEB": "#8822FF","ARA": "#145214","FAR": "#4d1933","GRC": "#290066","LAT":"#b35900", "POR": "#FFA500", "COP": "#666"}
+  var linksColor = {"manual": "#FFA500", "automatic": "#990257", "part_of": "#bbb"}
+  // Initialize the links
+
+var types = ["part_of", "manual", "automatic"]
+    svg.append("defs").selectAll("marker")
+    .data(types)
+    .enter().append("marker")
+      .attr("id", d => `arrow-${d}`)
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 15)
+      .attr("refY", -0.5)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+    .append("path")
+      .attr("fill", color)
+      .attr("d", "M0,-5L10,0L0,5");
+
+  var link = svg.append("g")
+      .attr("fill", "none")
+      .attr("stroke-width", 1.5)
+      .selectAll("path")
+    .data(data.links)
+    .enter().append('path')
+    .style("stroke", function(d){return linksColor[d.type]}) //{return d.type==="manual"?"#FFA500":"#990257"})
+    //.style("stroke-width", function(d){return d.type==="manual"?2:3}) // function(d){return d.value*6}
+    .style("stroke-dasharray", function(d){return d.type==="part_of"?6:0})
+
+const node = svg.append("g")
+      .attr("fill", "currentColor")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-linejoin", "round")
+    .selectAll("g")
+    .data(data.nodes)
+    .enter().append("g")
+      .call(drag(simulation));
+
+ node.append("circle")
+      .attr("fill", function(s){ return nodescolors[s.group]})
+      .attr("stroke-width", 1.5)
+      .attr("r", 4);
+
+  node.append("text")
+      .attr("x", 8)
+      .attr("y", "0.31em")
+      .text(function(d){return d.name+ "  ("+d.group.toLowerCase()+")"})
+      .style("color", function(s){ return nodescolors[s.group]})
+    .clone(true).lower()
+      .attr("fill", function(s){ return nodescolors[s.group]})
+      .attr("stroke", "white")
+      .attr("stroke-width", 3);
+
+
+  // Let's list the force we wanna apply on the network
+  var simulation = d3.forceSimulation(data.nodes)                 // Force algorithm is applied to data.nodes
+      .force("link", d3.forceLink()                               // This force provides links between nodes
+            .id(function(d) { return d.id; })                     // This provide  the id of a node
+            .links(data.links)                                    // and this the list of links
+      )
+      .force("charge", d3.forceManyBody().strength(-600))         // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+      .force("center", d3.forceCenter(width / 2, height / 2))     // This force attracts nodes to the center of the svg area
+      .on("end", ticked);
+
+  // This function is run at each iteration of the force algorithm, updating the nodes position.
+  function ticked() {
+    link.attr("d", linkArc);
+//        .attr("x1", function(d) { return d.source.x; })
+//        .attr("y1", function(d) { return d.source.y; })
+//        .attr("x2", function(d) { return d.target.x; })
+//        .attr("y2", function(d) { return d.target.y; });
+
+    node
+    .attr("transform", d => `translate(${d.x},${d.y})`);
+  }
+
+;
+
+function linkArc(d) {
+  const r = Math.hypot(d.target.x - d.source.x, d.target.y - d.source.y);
+  return `
+    M${d.source.x},${d.source.y}
+    A${r},${r} 0 0,1 ${d.target.x},${d.target.y}
+  `;
+}
+
+function drag (simulation )
+{
+  
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+  
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+  }
+  
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+  }
+  
+  return d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended);
+}
+
+</script>
